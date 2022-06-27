@@ -41,7 +41,8 @@ VFS.Include(HANDLER_DIR .. 'setupdefs.lua', nil, VFSMODE)
 VFS.Include(SCRIPT_DIR .. 'system.lua', nil, VFSMODE)
 VFS.Include(HANDLER_DIR .. 'callins.lua', nil, VFSMODE)
 VFS.Include(SCRIPT_DIR .. 'utilities.lua', nil, VFSMODE)
-
+table.insert(CALLIN_LIST, "AircraftCrashing")
+CALLIN_MAP["AircraftCrashing"] = #CALLIN_LIST
 local actionHandler = VFS.Include(HANDLER_DIR .. 'actions.lua', nil, VFSMODE)
 
 -- Utility call
@@ -1288,6 +1289,12 @@ end
 --
 --  Unit call-ins
 --
+function gadgetHandler:AircraftCrashing(unitID, unitDefID, unitTeam)
+	for _, g in ipairs(self.AircraftCrashingList) do
+		g:AircraftCrashing(unitID, unitDefID, unitTeam)
+	end
+	return
+end
 
 function gadgetHandler:UnitCreated(unitID, unitDefID, unitTeam, builderID)
 	for _, g in ipairs(self.UnitCreatedList) do

@@ -73,7 +73,6 @@ local spGetUnitIsBuilding = Spring.GetUnitIsBuilding
 local spValidUnitID = Spring.ValidUnitID
 local spGetTeamInfo = Spring.GetTeamInfo
 local simSpeed = Game.gameSpeed
-
 local max = math.max
 local floor = math.floor
 
@@ -99,6 +98,9 @@ function gadget:Initialize()
     for _,unitID in pairs(Spring.GetAllUnits()) do
         gadget:UnitCreated(unitID, Spring.GetUnitDefID(unitID), Spring.GetUnitTeam(unitID))
     end
+end
+function gadget:AircraftCrashing(unitID, unitDefID, teamID)
+	Spring.Echo("aircraft crashing")
 end
 
 function gadget:UnitCreated(unitID, unitDefID, teamID)

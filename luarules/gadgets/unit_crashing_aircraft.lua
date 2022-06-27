@@ -84,6 +84,7 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, w
 			-- make it crash
 			crashingCount = crashingCount + 1
 			crashing[unitID] = Spring.GetGameFrame() + 230
+			Spring.SetUnitBuildSpeed(unitID, 0)
 			SetUnitCOBValue(unitID, COB_CRASHING, 1)
 			SetUnitNoSelect(unitID,true)
 			SetUnitNoMinimap(unitID,true)
@@ -104,6 +105,8 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, w
 			SetUnitSensorRadius(unitID, "airLos", 0)
 			SetUnitSensorRadius(unitID, "radar", 0)
 			SetUnitSensorRadius(unitID, "sonar", 0)
+
+			gadgetHandler:AircraftCrashing(unitID, unitDefID, unitTeam)
 		end
 	end
 	return damage,1
